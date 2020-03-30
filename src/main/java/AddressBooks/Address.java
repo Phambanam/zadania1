@@ -7,6 +7,7 @@ public class Address {
     private String house;
     private String apartment;
 
+    public Address(){}
     public Address(String stress, String house, String apartment) {
         this.stress = stress;
         this.house = house;
@@ -31,5 +32,11 @@ public class Address {
     @Override
     public int hashCode() {
         return Objects.hash(stress, house, apartment);
+    }
+
+    @Override
+    public String toString() {
+
+        return this.getStress() +" "+ this.getHouse() +" "+ this.apartment;
     }
 }

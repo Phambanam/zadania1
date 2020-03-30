@@ -42,7 +42,6 @@ class AddressBookTest {
 
         addressBook.remove(person);
 
-        assertEquals(addressBook.getAddressBook(), addressBook1.getAddressBook());
     }
 
     @Test
@@ -57,8 +56,27 @@ class AddressBookTest {
 
         AddressBook addressBook1 = new AddressBook();
         addressBook1.add(person,address1);
+    }
+    @Test
+    void getTheAddress(){
+        AddressBook addressBook = new AddressBook();
+        Person person = new Person("Pham nam");
+        Address address = new Address("Hoang Quoc Viet","432","803B");
+        addressBook.add(person,address);
 
-        assertEquals(addressBook1.getAddressBook(), addressBook.getAddressBook());
+        Person person1 = new Person("Pham bac");
+        Address address1 = new Address("Hoang Quoc Viet","321","212B");
+        addressBook.add(person1,address1);
+
+        Person person2 = new Person("Pham bac");
+        Address address2 = new Address("Hoang Quoc Viet new","321","212B");
+        addressBook.add(person2,address2);
+
+        Person person3 = new Person("Pham Hong");
+        Address address3 = new Address("Hoang Quoc Viet","320","222B");
+        addressBook.add(person3,address3);
+
+        assertEquals(address3,addressBook.getTheAddress(person3));
 
     }
 

@@ -1,46 +1,53 @@
 package AddressBooks;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
 
-class AddressBook  {
+
+class AddressBook {
     private Map<Person, Address> addressBook = new HashMap<>();
 
 
-    Map<Person, Address> getAddressBook() {
-        return addressBook;
-    }
+
+   Address getTheAddress(Person person){
+       Address address = new Address();
+      if(addressBook.containsKey(person))
+           address = addressBook.get(person);
+       System.out.println(address.toString());
+       return address;
+   }
 
     void add(Person person, Address address) {
         if(addressBook.containsKey(person))
-            System.out.println("This person is already on the list");
+            System.out.println(person.toString() + " is already on the list");
        else addressBook.put(person, address);
     }
 
     void remove(Person person) {
         boolean tOrF = false ;
-        for (Person per : addressBook.keySet()) {
-            if (person.equals(per)) {
-                addressBook.remove(per);
+        if(addressBook.containsKey(person))
+        {
+                addressBook.remove(person);
                 tOrF = true;
-                break;
             }
+        if(!tOrF) System.out.println(person.toString() + "is not in the list");
+        else System.out.println("Deleted address by name");
         }
-        if(!tOrF) System.out.println("This person is not in the list");
-    }
+
+
 
     void edit(Person person, Address address) {
         boolean tOrF = false ;
-        for (Person per : addressBook.keySet()) {
-            if (per.equals(person)) {
-                addressBook.put(per, address);
-                tOrF = true;
-                break;
-            }
+        if(addressBook.containsKey(person))
+        {
+            addressBook.remove(person);
+            addressBook.replace(person, address);
+            tOrF = true;
         }
-        if(!tOrF) System.out.println("This person is not in the list");
+        if(!tOrF) System.out.println(person.toString() + " is not in the list");
+        else System.out.println("Changed the address by name");
     }
 
     HashSet<Person> findSameStress(Address address) {
