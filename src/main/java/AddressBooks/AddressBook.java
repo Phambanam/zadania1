@@ -22,7 +22,7 @@ class AddressBook  {
     void remove(Person person) {
         boolean tOrF = false ;
         for (Person per : addressBook.keySet()) {
-            if (per.equals(person)) {
+            if (person.equals(per)) {
                 addressBook.remove(per);
                 tOrF = true;
                 break;
@@ -48,9 +48,8 @@ class AddressBook  {
         addressBook.forEach((person, address1) -> {
             if (address1.getStress().equals(address.getStress()))
             sameStressList.add(person);
-
         });
-        if(sameStressList.size() != 0)
+        if(sameStressList.size() == 0)
             System.out.println("There are no people from the same street");
         return sameStressList;
     }
@@ -64,7 +63,7 @@ class AddressBook  {
                 sameHouse.add(person);
         }
                 ));
-        if(sameHouse.size() != 0 )
+        if(sameHouse.size() == 0 )
             System.out.println("There are no people from the same house");
         return  sameHouse;
     }

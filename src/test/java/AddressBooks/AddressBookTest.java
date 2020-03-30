@@ -11,16 +11,13 @@ class AddressBookTest {
     @Test
     void add()  {
         AddressBook addressBook = new AddressBook();
-        Person person = new Person();
-        person.setName("Pham Nam");
+        Person person = new Person("Pham Nam");
         Address address = new Address("Hoang Quoc Viet","432","803B");
 
-        Person person1 = new Person();
-        person.setName("Pham Bac");
+        Person person1 = new Person("Pham Bac");
         Address address1 = new Address("Hoang Viet","432","803B");
 
-        Person person2 = new Person();
-        person2.setName("Pham Bac");
+        Person person2 = new Person("Pham Bac");
         Address address2 = new Address("Hoang Viet","432","803B");
 
         addressBook.add(person,address);
@@ -32,13 +29,11 @@ class AddressBookTest {
     @Test
     void remove() {
         AddressBook addressBook = new AddressBook();
-        Person person = new Person();
-        person.setName("Pham ba nam");
+        Person person = new Person("Pham ba nam");
         Address address = new Address("Hoang Quoc Viet","432","803B");
         addressBook.add(person,address);
 
-        Person person1 = new Person();
-        person.setName("Pham ba nam");
+        Person person1 = new Person("Pham ba na");
         Address address1 = new Address("Hoang Quoc Viet","432","803B");
         addressBook.add(person1,address1);
 
@@ -53,8 +48,7 @@ class AddressBookTest {
     @Test
     void edit() {
         AddressBook addressBook = new AddressBook();
-        Person person = new Person();
-        person.setName("Pham ba nam");
+        Person person = new Person("Pham ba nam");
         Address address = new Address("Hoang Quoc Viet","432","803B");
         addressBook.add(person,address);
 
@@ -71,23 +65,19 @@ class AddressBookTest {
     @Test
     void findSameStress() {
         AddressBook addressBook = new AddressBook();
-        Person person = new Person();
-        person.setName("Pham nam");
+        Person person = new Person("Pham nam");
         Address address = new Address("Hoang Quoc Viet","432","803B");
         addressBook.add(person,address);
 
-        Person person1 = new Person();
-        person1.setName("Pham bac");
+        Person person1 = new Person("Pham bac");
         Address address1 = new Address("Hoang Quoc Viet","321","212B");
         addressBook.add(person1,address1);
 
-        Person person2 = new Person();
-        person1.setName("Pham bac");
+        Person person2 = new Person("Pham bac");
         Address address2 = new Address("Hoang Quoc Viet new","321","212B");
         addressBook.add(person2,address2);
 
-        Person person3 = new Person();
-        person1.setName("Pham Hong");
+        Person person3 = new Person("Pham Hong");
         Address address3 = new Address("Hoang Quoc Viet","320","222B");
         addressBook.add(person3,address3);
 
@@ -101,23 +91,19 @@ class AddressBookTest {
     @Test
     void findSameHouse() {
         AddressBook addressBook = new AddressBook();
-        Person person = new Person();
-        person.setName("Pham nam");
+        Person person = new Person("Pham nam");
         Address address = new Address("Hoang Quoc Viet","321","803B");
         addressBook.add(person,address);
 
-        Person person1 = new Person();
-        person1.setName("Pham bac");
+        Person person1 = new Person("Pham bac");
         Address address1 = new Address("Hoang Quoc Viet","321","212B");
         addressBook.add(person1,address1);
 
-        Person person2 = new Person();
-        person1.setName("Pham Oanh");
+        Person person2 = new Person("Pham Oanh");
         Address address2 = new Address("Hoang Quoc Viet","321","222B");
         addressBook.add(person2,address2);
 
-        Person person3 = new Person();
-        person1.setName("Pham Hong");
+        Person person3 = new Person("Pham Hong");
         Address address3 = new Address("Hoang Quoc Viet","320","222B");
         addressBook.add(person3,address3);
 
