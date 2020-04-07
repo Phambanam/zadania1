@@ -1,67 +1,55 @@
 package AddressBooks;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 
 
 class AddressBook {
     private Map<Person, Address> addressBook = new HashMap<>();
 
+    public Map<Person, Address> getAddressBook() {
+        return addressBook;
+    }
 
-
-   Address getTheAddress(Person person){
-       Address address = new Address();
-      if(addressBook.containsKey(person))
-           address = addressBook.get(person);
-       System.out.println(address.toString());
-       return address;
+    public Address getTheAddress(Person person) throws myException {
+        if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
+        return addressBook.get(person);
    }
 
-    void add(Person person, Address address) {
-        if(addressBook.containsKey(person))
-            System.out.println(person.toString() + " is already on the list");
-       else addressBook.put(person, address);
+    public void add(Person person, Address address) throws myException {
+        if(addressBook.containsKey(person)) throw new myException("personAlreadyExist");
+      addressBook.put(person, address);
+
     }
 
-    void remove(Person person) {
-        boolean tOrF = false ;
-        if(addressBook.containsKey(person))
-        {
-                addressBook.remove(person);
-                tOrF = true;
-            }
-        if(!tOrF) System.out.println(person.toString() + "is not in the list");
-        else System.out.println("Deleted address by name");
-        }
 
-
-
-    void edit(Person person, Address address) {
-        boolean tOrF = false ;
-        if(addressBook.containsKey(person))
-        {
+    public void remove(Person person) throws myException {
+         if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
             addressBook.remove(person);
-            addressBook.replace(person, address);
-            tOrF = true;
         }
-        if(!tOrF) System.out.println(person.toString() + " is not in the list");
-        else System.out.println("Changed the address by name");
+
+
+
+    public void edit(Person person, Address address) throws myException {
+        if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
+        addressBook.replace(person, address);
     }
 
-    HashSet<Person> findSameStress(Address address) {
+
+    public HashSet<Person> findSameStress(Address address) throws myException {
         HashSet<Person>sameStressList = new HashSet<>();
         addressBook.forEach((person, address1) -> {
             if (address1.getStress().equals(address.getStress()))
             sameStressList.add(person);
         });
         if(sameStressList.size() == 0)
-            System.out.println("There are no people from the same street");
+            throw new myException("emptyList");
         return sameStressList;
     }
 
-    HashSet<Person> findSameHouse(Address address){
+    public HashSet<Person> findSameHouse(Address address) throws myException {
         HashSet<Person> sameHouse = new HashSet<>();
         addressBook.forEach(((person, address1) ->
         {
@@ -71,7 +59,22 @@ class AddressBook {
         }
                 ));
         if(sameHouse.size() == 0 )
-            System.out.println("There are no people from the same house");
+            throw new myException("emptyList");
+
         return  sameHouse;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null ) return false;
+        if(obj.getClass() != this.getClass()) return false;
+        AddressBook a = (AddressBook) obj;
+        return (this.hashCode() == a.hashCode() );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(addressBook);
     }
 }

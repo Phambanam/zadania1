@@ -10,8 +10,14 @@ class Person {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null ) return false;
         if (obj.getClass() != this.getClass()) return false;
         Person n = (Person) obj;
         return this.name.equals(n.name);
@@ -24,6 +30,6 @@ class Person {
 
     @Override
     public String toString() {
-        return this.name;
+        return this.getName();
     }
 }
