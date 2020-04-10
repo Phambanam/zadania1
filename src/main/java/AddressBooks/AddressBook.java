@@ -10,30 +10,32 @@ class AddressBook {
     private Map<Person, Address> addressBook = new HashMap<>();
 
     public Map<Person, Address> getAddressBook() {
-        return addressBook;
+        return new HashMap<>(addressBook);
     }
 
     public Address getTheAddress(Person person) throws myException {
-        if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
-        return addressBook.get(person);
-   }
+        Address address = addressBook.get(person);
+        if (address == null) throw new myException("This person does not exist yet");
+        else return address;
+    }
 
     public void add(Person person, Address address) throws myException {
-        if(addressBook.containsKey(person)) throw new myException("personAlreadyExist");
-      addressBook.put(person, address);
-
+        addressBook.putIfAbsent(person, address);
+        if (addressBook.get(person) != address) throw new myException("Person already exists");
     }
 
 
     public void remove(Person person) throws myException {
-         if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
-            addressBook.remove(person);
-        }
+        if (addressBook.remove(person) == null)
+            throw new myException("This person does not exist yet");
+        addressBook.remove(person);
+    }
 
 
 
     public void edit(Person person, Address address) throws myException {
-        if(!addressBook.containsKey(person)) throw new myException("doesn'tExistPerson");
+        if (addressBook.replace(person, address) == null)
+            throw new myException("This person does not exist yet");
         addressBook.replace(person, address);
     }
 
