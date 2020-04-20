@@ -20,15 +20,14 @@ class AddressBook {
     }
 
     public void add(Person person, Address address) throws myException {
-        addressBook.putIfAbsent(person, address);
-        if (addressBook.get(person) != address) throw new myException("Person already exists");
+        if ( addressBook.putIfAbsent(person, address) != null)
+            throw new myException("Person already exists");
     }
 
 
     public void remove(Person person) throws myException {
         if (addressBook.remove(person) == null)
             throw new myException("This person does not exist yet");
-        addressBook.remove(person);
     }
 
 
@@ -36,7 +35,7 @@ class AddressBook {
     public void edit(Person person, Address address) throws myException {
         if (addressBook.replace(person, address) == null)
             throw new myException("This person does not exist yet");
-        addressBook.replace(person, address);
+
     }
 
 
